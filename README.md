@@ -107,3 +107,72 @@ docker start {container_id or container_name}
 ```
 docker run --name {name} ...
 ```
+
+## Registry vs Repository
+Docker registry have multiple Docker repositories for different application images
+
+Docker repository: collection of related images with same name but different version
+
+Giống npm Registry.
+
+## Dockerfile - create own images
+Dockerfile is definition how to build image from our application
+
+Dockerfile can build a Docker Image.
+
+### Structure of Dockerfile
+
+#### Base image (parent image)
+Ví dụ:
+- NodeJS image nếu app ta được xây dựng dựa trên JS
+- Python image nếu app ta được xây dựng dựa trên Python
+- Tomcat image nếu app ta được xây dựng dựa trên Java
+
+Define base image using directive (meaning build our image from the base image)
+```
+FROM 
+```
+
+Every image gồm <b>multiple image layers</b> => image layer can be cached => Efficient
+
+#### Execute Linux Command
+Execute any command in shell inside container environment
+```
+RUN
+```
+
+RUN executed in container
+
+#### Copy files from local computer and paste into container
+Copies files or dir from <src> and adds to filesystem of container at <dest>
+```
+COPY
+```
+
+COPY executed in host
+
+#### Move into working directory
+Move into working directory for following commands like cd in Linux command
+```
+WORKDIR
+```
+#### Last command in Dockerfile
+Instruction that to be executed when docker container start
+```
+CMD 
+```
+
+just one CMD instruction in dockerfile
+
+#### Note
+/app/ slash at the end quan trọng vì docker sẽ tạo folder app nếu không tồn tại trong container
+
+## Build image
+```
+docker build -t {path_dockerfile} 
+```
+-t => set name and tag in "name:tag" format
+
+A docker image consist of layers 
+
+Each instruction in docker file create one layer
